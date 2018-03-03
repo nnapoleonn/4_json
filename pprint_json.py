@@ -4,8 +4,8 @@ import sys
 
 
 def load_data(filepath):
-    with open(filepath) as data_from_json:
-        return json.loads(data_from_json.read())
+    with open(filepath) as object_for_read:
+        return json.loads(object_for_read.read())
 
 
 def pretty_print_json(data_from_json):
@@ -14,9 +14,11 @@ def pretty_print_json(data_from_json):
 
 if __name__ == '__main__':
     try:
-        data_in_file = load_data(sys.argv[1])
-        pretty_print_json(data_in_file)
+        data_for_print = load_data(sys.argv[1])
+        pretty_print_json(data_for_print)
     except IndexError:
         print('Enter path to file.')
     except FileNotFoundError:
         print('File not found.')
+    except json.decoder.JSONDecodeError:
+        print('It is not JSON file.')
